@@ -10,7 +10,7 @@
 		4DAA35DC2E00BB6E0015FD3E /* NotificationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DAA35DB2E00BB6E0015FD3E /* NotificationKit */; };
 		4DAA35DE2E00BB760015FD3E /* NotificationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DAA35DD2E00BB760015FD3E /* NotificationKit */; };
 		4DAA35E02E00BB7C0015FD3E /* NotificationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4DAA35DF2E00BB7C0015FD3E /* NotificationKit */; };
-		4DAA35EC2E00C2CE0015FD3E /* README.me in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA35EB2E00C2CE0015FD3E /* README.me */; };
+		4DAA35EE2E00C66C0015FD3E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA35ED2E00C66C0015FD3E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +34,7 @@
 		4DAA35AE2E00865D0015FD3E /* NotificationKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotificationKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA35BC2E00865E0015FD3E /* NotificationKitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotificationKitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DAA35C62E00865E0015FD3E /* NotificationKitDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotificationKitDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4DAA35EB2E00C2CE0015FD3E /* README.me */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.me; sourceTree = "<group>"; };
+		4DAA35ED2E00C66C0015FD3E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -86,7 +86,7 @@
 		4DAA35A52E00865D0015FD3E = {
 			isa = PBXGroup;
 			children = (
-				4DAA35EB2E00C2CE0015FD3E /* README.me */,
+				4DAA35ED2E00C66C0015FD3E /* README.md */,
 				4DAA35B02E00865D0015FD3E /* NotificationKitDemo */,
 				4DAA35BF2E00865E0015FD3E /* NotificationKitDemoTests */,
 				4DAA35C92E00865E0015FD3E /* NotificationKitDemoUITests */,
@@ -238,7 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DAA35EC2E00C2CE0015FD3E /* README.me in Resources */,
+				4DAA35EE2E00C66C0015FD3E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
