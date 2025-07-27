@@ -20,7 +20,7 @@ struct SettingsView: View {
                         VStack(alignment: .leading) {
                             Text("NotificationKit")
                                 .font(.headline)
-                            Text("v1.0.0")
+                            Text("v1.1.0")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }

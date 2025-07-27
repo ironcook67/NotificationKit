@@ -629,7 +629,7 @@
 			repositoryURL = "https://github.com/ironcook67/NotificationKit";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
