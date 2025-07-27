@@ -44,4 +44,26 @@ final class NotificationErrorTests: XCTestCase {
         XCTAssertTrue(error.errorDescription?.contains("Invalid notification trigger") == true)
         XCTAssertTrue(error.errorDescription?.contains("Date is in the past") == true)
     }
+    
+    func testPersistenceSetupFailedError() {
+        let underlyingError = NSError(domain: "PersistenceDomain", code: 2, userInfo: [NSLocalizedDescriptionKey: "Database setup failed"])
+        let error = NotificationError.persistenceSetupFailed(underlyingError)
+
+        XCTAssertNotNil(error.errorDescription)
+        XCTAssertTrue(error.errorDescription?.contains("Failed to setup notification persistence") == true)
+        XCTAssertTrue(error.errorDescription?.contains("Database setup failed") == true)
+        XCTAssertNotNil(error.failureReason)
+        XCTAssertTrue(error.failureReason?.contains("could not be initialized") == true)
+    }
+    
+    func testPersistenceOperationFailedError() {
+        let underlyingError = NSError(domain: "PersistenceDomain", code: 3, userInfo: [NSLocalizedDescriptionKey: "Save operation failed"])
+        let error = NotificationError.persistenceOperationFailed(underlyingError)
+
+        XCTAssertNotNil(error.errorDescription)
+        XCTAssertTrue(error.errorDescription?.contains("Notification persistence operation failed") == true)
+        XCTAssertTrue(error.errorDescription?.contains("Save operation failed") == true)
+        XCTAssertNotNil(error.failureReason)
+        XCTAssertTrue(error.failureReason?.contains("could not be completed") == true)
+    }
 }
