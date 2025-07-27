@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D20BC472E36083A009AC35C /* NotificationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D20BC462E36083A009AC35C /* NotificationKit */; };
+		4D20BCD12E360D63009AC35C /* NotificationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D20BCD02E360D63009AC35C /* NotificationKit */; };
 		4DAA35EE2E00C66C0015FD3E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA35ED2E00C66C0015FD3E /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D20BC472E36083A009AC35C /* NotificationKit in Frameworks */,
+				4D20BCD12E360D63009AC35C /* NotificationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +128,7 @@
 			);
 			name = NotificationKitDemo;
 			packageProductDependencies = (
-				4D20BC462E36083A009AC35C /* NotificationKit */,
+				4D20BCD02E360D63009AC35C /* NotificationKit */,
 			);
 			productName = NotificationKitDemo;
 			productReference = 4DAA35AE2E00865D0015FD3E /* NotificationKitDemo.app */;
@@ -213,7 +213,7 @@
 			mainGroup = 4DAA35A52E00865D0015FD3E;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4D20BC452E36083A009AC35C /* XCRemoteSwiftPackageReference "NotificationKit" */,
+				4D20BCCF2E360D63009AC35C /* XCRemoteSwiftPackageReference "NotificationKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4DAA35AF2E00865D0015FD3E /* Products */;
@@ -623,17 +623,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		4D20BC452E36083A009AC35C /* XCLocalSwiftPackageReference "NotificationKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../;
+/* Begin XCRemoteSwiftPackageReference section */
+		4D20BCCF2E360D63009AC35C /* XCRemoteSwiftPackageReference "NotificationKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ironcook67/NotificationKit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.0;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4D20BC462E36083A009AC35C /* NotificationKit */ = {
+		4D20BCD02E360D63009AC35C /* NotificationKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4D20BC452E36083A009AC35C /* XCRemoteSwiftPackageReference "NotificationKit" */;
+			package = 4D20BCCF2E360D63009AC35C /* XCRemoteSwiftPackageReference "NotificationKit" */;
 			productName = NotificationKit;
 		};
 /* End XCSwiftPackageProductDependency section */
