@@ -17,9 +17,15 @@ class NotificationDemoManager: NSObject, ObservableObject {
     @Published var deliveredNotifications: [UNNotification] = []
     @Published var statusMessage = ""
     @Published var isLocationPermissionGranted = false
+    @Published var notificationHistory: [PersistentNotificationRequest] = []
+    @Published var notificationStats: [String: Int] = [:]
 
-    private let manager = NotificationManager()
+    private let manager = NotificationManager(enablePersistence: true)
     private let locationManager = CLLocationManager()
+    
+    var isPersistenceEnabled: Bool {
+        manager.isPersistenceEnabled
+    }
 
     override init() {
         super.init()
@@ -29,6 +35,7 @@ class NotificationDemoManager: NSObject, ObservableObject {
     func initialize() async {
         await updatePermissionStatus()
         await refreshNotifications()
+        await refreshPersistentData()
         setupNotificationDelegate()
     }
 
@@ -59,6 +66,18 @@ class NotificationDemoManager: NSObject, ObservableObject {
     func refreshNotifications() async {
         pendingNotifications = await manager.pendingNotificationRequests()
         deliveredNotifications = await manager.deliveredNotifications()
+        await refreshPersistentData()
+    }
+    
+    private func refreshPersistentData() async {
+        if manager.isPersistenceEnabled {
+            do {
+                notificationHistory = try await manager.notificationHistory(limit: 50)
+                notificationStats = try await manager.notificationStatistics()
+            } catch {
+                print("Failed to load persistent data: \(error)")
+            }
+        }
     }
 
     private func setupNotificationDelegate() {
@@ -181,6 +200,18 @@ class NotificationDemoManager: NSObject, ObservableObject {
         }
     }
 
+    func cleanupOldNotifications() async {
+        do {
+            let thirtyDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
+            try await manager.cleanupOldNotifications(olderThan: thirtyDaysAgo)
+            await refreshPersistentData()
+            statusMessage = "🧹 Cleaned up old notifications"
+        } catch {
+            statusMessage = "❌ Failed to cleanup old notifications: \(error.localizedDescription)"
+        }
+        clearStatusAfterDelay()
+    }
+    
     private func clearStatusAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.statusMessage = ""
@@ -199,13 +230,16 @@ extension NotificationDemoManager: @preconcurrency CLLocationManagerDelegate {
 extension NotificationDemoManager: @preconcurrency UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Show notifications even when app is in foreground
-        completionHandler([.alert, .sound, .badge])
+        completionHandler([.banner, .sound, .badge])
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle notification tap
         print("Notification tapped: \(response.notification.request.identifier)")
+        
+        // Mark as delivered in persistence
         Task {
+            try? await manager.markAsDelivered(notificationWithId: response.notification.request.identifier)
             await refreshNotifications()
         }
         completionHandler()
