@@ -11,6 +11,7 @@ A comprehensive Swift Package for managing local notifications across all Apple 
 - **🧪 Well-Tested**: Comprehensive unit test coverage
 - **📚 Documented**: Full DocC documentation for all public APIs
 - **🎯 Focused**: Zero external dependencies - uses only system frameworks
+- **💾 Persistence**: Optional SwiftData integration for notification tracking and analytics
 
 ## Platform Support
 
@@ -36,7 +37,7 @@ Or add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/NotificationKit.git", from: "1.0.0")
+    .package(url: "https://github.com/yourusername/NotificationKit.git", from: "1.1.0")
 ]
 ```
 
@@ -65,6 +66,47 @@ let request = NotificationRequest(
 
 try await manager.schedule(request)
 ```
+
+## Persistence & Analytics
+
+NotificationKit includes optional SwiftData persistence for tracking notification history and analytics:
+
+```swift
+// Enable persistence when creating the manager
+let manager = NotificationManager(enablePersistence: true)
+
+// Or use in-memory persistence for testing
+let testManager = NotificationManager(enablePersistence: true, inMemoryPersistence: true)
+
+// Get notification history
+let history = try await manager.notificationHistory(limit: 100)
+let recentHistory = try await manager.notificationHistory(
+    limit: 50,
+    since: Calendar.current.date(byAdding: .day, value: -7, to: Date())
+)
+
+// Get notification statistics
+let stats = try await manager.notificationStatistics()
+print("Delivered: \(stats.deliveredCount)")
+print("Cancelled: \(stats.cancelledCount)")
+print("Failed: \(stats.failedCount)")
+
+// Mark notifications as delivered (typically called in UNUserNotificationCenterDelegate)
+try await manager.markAsDelivered(notificationWithId: "notification-id")
+
+// Cleanup old notification records
+let thirtyDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+try await manager.cleanupOldNotifications(olderThan: thirtyDaysAgo)
+```
+
+### Notification Status Lifecycle
+
+When persistence is enabled, notifications automatically track their lifecycle:
+- **`.created`**: Initial state when notification is created
+- **`.scheduled`**: Successfully scheduled with the system
+- **`.delivered`**: Delivered to the user (must be marked manually via delegate)
+- **`.cancelled`**: Cancelled before delivery
+- **`.failed`**: Failed to schedule or deliver
 
 ## Advanced Usage
 
@@ -453,6 +495,15 @@ swift package generate-documentation
 NotificationKit is available under the MIT license. See the LICENSE file for more info.
 
 ## Changelog
+
+### 1.1.0
+- **NEW**: SwiftData persistence system for notification tracking and analytics
+- **NEW**: Notification history and statistics with `notificationHistory()` and `notificationStatistics()`
+- **NEW**: Status lifecycle tracking (created → scheduled → delivered/cancelled/failed)
+- **NEW**: Cross-platform persistence support with optional in-memory mode for testing
+- **FIXED**: SwiftData enum storage compatibility issue with `NotificationStatus`
+- **IMPROVED**: Enhanced notification management with persistence cleanup methods
+- **IMPROVED**: Better error handling for persistence operations
 
 ### 1.0.0
 - Initial release

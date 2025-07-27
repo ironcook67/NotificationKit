@@ -42,7 +42,7 @@ import Foundation
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 10.0, visionOS 2.0, *)
 public struct NotificationKit {
     /// The current version of the NotificationKit package.
-    public static let version = "1.0.0"
+    public static let version = "1.1.0"
 
     /// The shared notification manager instance.
     ///
