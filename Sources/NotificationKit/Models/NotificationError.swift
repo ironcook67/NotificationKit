@@ -31,6 +31,16 @@ public enum NotificationError: Error, LocalizedError, Sendable {
     ///
     /// - Parameter reason: A description of why the trigger is invalid.
     case invalidTrigger(reason: String)
+    
+    /// Persistence setup failed.
+    ///
+    /// - Parameter underlyingError: The underlying error that caused the failure.
+    case persistenceSetupFailed(Error)
+    
+    /// A persistence operation failed.
+    ///
+    /// - Parameter underlyingError: The underlying error that caused the failure.
+    case persistenceOperationFailed(Error)
 
     /// A user-friendly description of the error.
     public var errorDescription: String? {
@@ -46,6 +56,12 @@ public enum NotificationError: Error, LocalizedError, Sendable {
 
         case .invalidTrigger(let reason):
             return "Invalid notification trigger: \(reason)"
+            
+        case .persistenceSetupFailed(let error):
+            return "Failed to setup notification persistence: \(error.localizedDescription)"
+            
+        case .persistenceOperationFailed(let error):
+            return "Notification persistence operation failed: \(error.localizedDescription)"
         }
     }
 
@@ -63,6 +79,12 @@ public enum NotificationError: Error, LocalizedError, Sendable {
 
         case .invalidTrigger(let reason):
             return "The notification trigger is not valid: \(reason)"
+            
+        case .persistenceSetupFailed(let error):
+            return "The notification persistence system could not be initialized. Underlying error: \(error)"
+            
+        case .persistenceOperationFailed(let error):
+            return "The notification persistence operation could not be completed. Underlying error: \(error)"
         }
     }
 }

@@ -70,12 +70,13 @@ final class NotificationTriggerTests: XCTestCase {
 
         XCTAssertTrue(unTrigger is UNLocationNotificationTrigger)
 
-        if let locationTrigger = unTrigger as? UNLocationNotificationTrigger {
+        if let locationTrigger = unTrigger as? UNLocationNotificationTrigger,
+           let circularRegion = locationTrigger.region as? CLCircularRegion {
             XCTAssertFalse(locationTrigger.repeats)
-            XCTAssertEqual(locationTrigger.region.center.latitude, 37.7749, accuracy: 0.0001)
-            XCTAssertEqual(locationTrigger.region.center.longitude, -122.4194, accuracy: 0.0001)
-            XCTAssertEqual(locationTrigger.region.radius, 1000, accuracy: 0.1)
-            XCTAssertEqual(locationTrigger.region.identifier, "test-region")
+            XCTAssertEqual(circularRegion.center.latitude, 37.7749, accuracy: 0.0001)
+            XCTAssertEqual(circularRegion.center.longitude, -122.4194, accuracy: 0.0001)
+            XCTAssertEqual(circularRegion.radius, 1000, accuracy: 0.1)
+            XCTAssertEqual(circularRegion.identifier, "test-region")
         }
 #endif
     }
