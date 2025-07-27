@@ -13,7 +13,7 @@ import XCTest
 final class NotificationKitTests: XCTestCase {
     
     func testNotificationKitVersion() {
-        XCTAssertEqual(NotificationKit.version, "1.0.0")
+        XCTAssertEqual(NotificationKit.version, "1.1.0")
     }
     
     func testNotificationManagerType() {
