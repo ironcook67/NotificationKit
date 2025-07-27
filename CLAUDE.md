@@ -163,3 +163,21 @@ The `NotificationKitDemo` directory contains a full SwiftUI demo app showing:
 - Notification management
 - **Persistence features**: History view, statistics, cleanup
 - Platform-specific features
+
+### Building and Running the Demo
+```bash
+# Open the demo project in Xcode
+open NotificationKitDemo/NotificationKitDemo.xcodeproj
+
+# Build the demo app from command line (requires Xcode)
+xcodebuild -project NotificationKitDemo/NotificationKitDemo.xcodeproj -scheme NotificationKitDemo -destination 'platform=iOS Simulator,name=iPhone 15'
+
+# Run demo tests
+xcodebuild test -project NotificationKitDemo/NotificationKitDemo.xcodeproj -scheme NotificationKitDemo -destination 'platform=iOS Simulator,name=iPhone 15'
+```
+
+### Demo App Architecture
+- **NotificationDemoManager**: Wrapper around NotificationManager with demo-specific functionality
+- **Views**: Organized by feature (ContentView, LocationsNotificationsView, ManageNotificationsView, etc.)
+- **Persistence Integration**: Full persistence features with history tracking and statistics
+- **Platform-Specific Code**: Uses conditional compilation for iOS-only location features

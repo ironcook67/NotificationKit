@@ -65,8 +65,18 @@ public final class PersistentNotificationRequest: @unchecked Sendable {
     /// When this notification was cancelled.
     public var cancelledAt: Date?
     
+    /// The current status of the notification (stored as raw value).
+    private var statusRawValue: String
+    
     /// The current status of the notification.
-    public var status: NotificationStatus
+    public var status: NotificationStatus {
+        get {
+            NotificationStatus(rawValue: statusRawValue) ?? .created
+        }
+        set {
+            statusRawValue = newValue.rawValue
+        }
+    }
     
     /// Creates a new persistent notification request.
     ///
@@ -111,7 +121,7 @@ public final class PersistentNotificationRequest: @unchecked Sendable {
         self.userInfoData = userInfoData
         self.threadIdentifier = threadIdentifier
         self.createdAt = createdAt
-        self.status = status
+        self.statusRawValue = status.rawValue
     }
     
     /// Creates a persistent notification request from a `NotificationRequest`.

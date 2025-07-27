@@ -14,7 +14,7 @@ struct NotificationHistoryView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if demoManager.manager.isPersistenceEnabled {
+                if demoManager.isPersistenceEnabled {
                     List {
                         Section("Statistics") {
                             statisticsSection

@@ -22,6 +22,10 @@ class NotificationDemoManager: NSObject, ObservableObject {
 
     private let manager = NotificationManager(enablePersistence: true)
     private let locationManager = CLLocationManager()
+    
+    var isPersistenceEnabled: Bool {
+        manager.isPersistenceEnabled
+    }
 
     override init() {
         super.init()
